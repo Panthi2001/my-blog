@@ -47,16 +47,20 @@ const post = getPostBySlug(category, slug)
         alt={`${post.title} image ${index + 1}`}
         width={800}
         height={450}
-        className="w-full rounded-xl object-cover"
+        className="rounded-xl object-cover"
       />
     ))}
   </div>
 )}
 
 
-      <div className="text-gray-700 leading-relaxed space-y-4">
-        <ReactMarkdown>{post.content}</ReactMarkdown>
-      </div>
+      <div className={`leading-relaxed space-y-4 prose prose-gray max-w-none ${
+  post.category === "poetry" 
+    ? "text-center italic text-gray-700 text-lg font-serif border-t border-gray-200 pt-8 mt-4" 
+    : "text-gray-700"
+}`}>
+  <ReactMarkdown>{post.content}</ReactMarkdown>
+</div>
 
     </main>
   )

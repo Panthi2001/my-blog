@@ -1,6 +1,6 @@
 ---
 title: "Project Hail Mary"
-date: "2024-01-15"
+date: "2026-20-23"
 category: "movies"
 excerpt: "A lone astronaut wakes up millions of miles from home with no memory. What follows is one of the best sci fi stories ever told."
 description: "I picked this up after seeing it recommended on a Reddit thread about feel good sci fi. Did not expect to be fun and emotional at the same time"
