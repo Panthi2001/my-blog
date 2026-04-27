@@ -1,11 +1,9 @@
-// no "use client" here — this runs only on the server
-import { getAllPosts } from "@/lib/posts"
-import  HomeClient from './HomeClient'
+import { getAllPostsFromDB } from "@/lib/posts"
+import HomeClient from "./HomeClient"
 
-export default function Home() {
-  // this runs on the server — fs works fine here
-  const posts = getAllPosts()
-
-  // pass the posts down to the client component as a prop
+export default async function Home() {
+  const posts = await getAllPostsFromDB()
+  console.log("Posts from DB:", posts)
+  console.log("Post count:", posts.length)
   return <HomeClient posts={posts} />
 }

@@ -1,6 +1,7 @@
 import { getAllPosts } from "@/lib/posts"
 import Link from "next/link"
 import Image from "next/image"
+import { getAllPostsFromDB } from "@/lib/posts"
 
 export default function PhotographyPage() {
   const posts = getAllPosts().filter(post => post.category === "photography")
@@ -16,9 +17,9 @@ export default function PhotographyPage() {
         {/* YOUR QUOTE HERE — something about seeing, light, or capturing moments */}
         <blockquote className="border-l-4 border-gray-300 pl-6 mb-8">
           <p className="text-gray-600 italic text-lg leading-relaxed">
-            "Your quote here"
+            "You don't take a photograph, you make it"
           </p>
-          <footer className="text-sm text-gray-400 mt-2">— Author</footer>
+          <footer className="text-sm text-gray-400 mt-2">— Ansel Admas</footer>
         </blockquote>
 
         <div className="space-y-4 text-gray-600 leading-relaxed">
@@ -26,9 +27,9 @@ export default function PhotographyPage() {
           {/* Talk about your relationship with photography */}
           {/* What you try to capture */}
           {/* Your camera, your eye, your process */}
-          <p>Your intro paragraph one here.</p>
+          {/* <p>Your intro paragraph one here.</p>
           <p>Your intro paragraph two here.</p>
-          <p>Your intro paragraph three here.</p>
+          <p>Your intro paragraph three here.</p> */}
         </div>
       </div>
 

@@ -1,21 +1,15 @@
-import { getPostBySlug } from "@/lib/posts"
+import { getPostBySlugFromDB } from "@/lib/posts"
 import { notFound } from "next/navigation"
 import ReactMarkdown from "react-markdown"
 import Image from "next/image"
+
 export default async function ArticlePage({
   params,
 }: {
   params: Promise<{ category: string; slug: string }>
 }) {
-  // await params before using them
   const { category, slug } = await params
-
-  
-
-
-const post = getPostBySlug(category, slug)
-
-  
+  const post = await getPostBySlugFromDB(category, slug)
 
   if (!post) return notFound()
 
@@ -38,29 +32,28 @@ const post = getPostBySlug(category, slug)
         </p>
       )}
 
-     {post.images && post.images.length > 0 && (
-  <div className="grid grid-cols-2 gap-4 mb-8">
-    {post.images.map((image, index) => (
-      <Image
-        key={index}
-        src={image}
-        alt={`${post.title} image ${index + 1}`}
-        width={800}
-        height={450}
-        className="rounded-xl object-cover"
-      />
-    ))}
-  </div>
-)}
-
+      {post.images && post.images.length > 0 && (
+        <div className="grid grid-cols-2 gap-4 mb-8">
+          {post.images.map((image, index) => (
+            <div key={index} className="relative h-48">
+              <Image
+                src={image}
+                alt={`${post.title} image ${index + 1}`}
+                fill
+                className="rounded-xl object-cover"
+              />
+            </div>
+          ))}
+        </div>
+      )}
 
       <div className={`leading-relaxed space-y-4 prose prose-gray max-w-none ${
-  post.category === "poetry" 
-    ? "text-center italic text-gray-700 text-lg font-serif border-t border-gray-200 pt-8 mt-4" 
-    : "text-gray-700"
-}`}>
-  <ReactMarkdown>{post.content}</ReactMarkdown>
-</div>
+        post.category === "poetry"
+          ? "text-center italic text-gray-700 text-lg font-serif border-t border-gray-200 pt-8 mt-4"
+          : "text-gray-700"
+      }`}>
+        <ReactMarkdown>{post.content}</ReactMarkdown>
+      </div>
 
     </main>
   )

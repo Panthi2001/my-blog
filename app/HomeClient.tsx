@@ -12,7 +12,7 @@ export default function HomeClient({ posts }: { posts: Post[] }) {
     <main className="max-w-2xl mx-auto px-6 py-16">
 
       {/* Top half — intro */}
-      <div className="flex items-center gap-8 mb-16 px-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
+      <div className="flex items-center gap-8 mb-16 px-6 py-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
         
         {/* photo placeholder */}
         <div className="w-24 h-24 rounded-full bg-gray-200 shrink-0" />
@@ -36,7 +36,7 @@ export default function HomeClient({ posts }: { posts: Post[] }) {
           {showMore && (
             <div className="mt-4 text-gray-600 leading-relaxed space-y-3 text-sm">
               <p>
-                I am in my late 20s. A student of computer science and technology —
+                I am in my late 20s. A student of computer science and technology 
                 though that is just one layer of who I am.
               </p>
               <p>
@@ -46,11 +46,11 @@ export default function HomeClient({ posts }: { posts: Post[] }) {
               </p>
               <p>
                 I am just a leaf stranded in the wind. When there is no wind, I am
-                here — but usually I like to make plans, take actions, read books,
+                here  but usually I like to make plans, take actions, read books,
                 listen to a TED talk or two.
               </p>
               <p>
-                Could you imagine our ancestors used to carve information onto stones —
+                Could you imagine our ancestors used to carve information onto stones 
                 while today, in a single day, we produce more information than all of
                 humanity created before the 20th century. Even if most of it is useless. Haha.
               </p>
