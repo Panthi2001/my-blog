@@ -1,8 +1,10 @@
-import { getAllPostsFromDB } from "@/lib/posts"
+import { getPostsByCategory } from "@/lib/posts"
 import Link from "next/link"
 import Image from "next/image"
-export default async function Foodpage(){
-    const posts = (await getAllPostsFromDB()).filter(post => post.category === "food")
+
+export default async function FoodPage() {
+  // get only movie posts
+const posts = await getPostsByCategory("food")
     return(
          <main className="max-w-2xl mx-auto px-6 py-16">
            <div className="mb-12">

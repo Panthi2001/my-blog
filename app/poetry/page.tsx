@@ -1,8 +1,8 @@
-import { getAllPosts, getAllPostsFromDB } from "@/lib/posts"
+import { getPostsByCategory } from "@/lib/posts"
 import Link from "next/link"
 
 export default async function PoetryPage() {
-  const posts = await getAllPostsFromDB().then(p => p.filter(post => post.category === "poetry"))
+  const posts = await getPostsByCategory("poetry")
 
   return (
     <main className="max-w-2xl mx-auto px-6 py-16">

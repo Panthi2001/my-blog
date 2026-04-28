@@ -1,10 +1,10 @@
-import { getAllPosts } from "@/lib/posts"
+import { getAllPostsFromDB } from "@/lib/posts"
 import Link from "next/link"
 import Image from "next/image"
 
 export default function AbstractPage() {
-  const posts = getAllPosts().filter(post => post.category === "abstract")
-
+  const { posts: allPosts } = await getAllPostsFromDB()
+  const posts = allPosts.filter(post => post.category === "abstract")
   return (
     <main className="max-w-2xl mx-auto px-6 py-16">
 

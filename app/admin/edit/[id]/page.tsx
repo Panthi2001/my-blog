@@ -14,10 +14,7 @@ export default function EditPostPage({ params }: { params: Promise<{ id: string 
   const [loading, setLoading] = useState(false)
   const [fetching, setFetching] = useState(true)
   const [error, setError] = useState("")
-  
-  // store id in state so handleSubmit and handleDelete can use it
   const [id, setId] = useState("")
-
   const [title, setTitle] = useState("")
   const [slug, setSlug] = useState("")
   const [category, setCategory] = useState("movies")
@@ -26,10 +23,11 @@ export default function EditPostPage({ params }: { params: Promise<{ id: string 
   const [description, setDescription] = useState("")
   const [content, setContent] = useState("")
   const [published, setPublished] = useState(true)
+  const [images, setImages] = useState<string[]>([])
+  const [uploading, setUploading] = useState(false)
 
   useEffect(() => {
     async function init() {
-      // await params first — Next.js 15 requires this
       const resolvedParams = await params
       const postId = resolvedParams.id
       setId(postId)
@@ -46,7 +44,6 @@ export default function EditPostPage({ params }: { params: Promise<{ id: string 
         return
       }
 
-      // populate all form fields with existing data
       setTitle(data.title)
       setSlug(data.slug)
       setCategory(data.category)
@@ -55,11 +52,50 @@ export default function EditPostPage({ params }: { params: Promise<{ id: string 
       setDescription(data.description || "")
       setContent(data.content)
       setPublished(data.published)
+      // load existing images from database
+      setImages(data.images || [])
       setFetching(false)
     }
 
     init()
-  }, [params])
+  }, [])
+
+  // upload single file to supabase storage and return public URL
+  async function handleImageUpload(file: File): Promise<string> {
+    const filename = `${Date.now()}-${file.name.replace(/\s+/g, "-")}`
+
+    const { error } = await supabase.storage
+      .from("images")
+      .upload(filename, file)
+
+    if (error) {
+      setError("Image upload failed: " + error.message)
+      return ""
+    }
+
+    const { data: urlData } = supabase.storage
+      .from("images")
+      .getPublicUrl(filename)
+
+    return urlData.publicUrl
+  }
+
+  // handle multiple file selection
+  async function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const files = e.target.files
+    if (!files || files.length === 0) return
+
+    setUploading(true)
+    const uploadedUrls: string[] = []
+
+    for (const file of Array.from(files)) {
+      const url = await handleImageUpload(file)
+      if (url) uploadedUrls.push(url)
+    }
+
+    setImages(prev => [...prev, ...uploadedUrls])
+    setUploading(false)
+  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -71,6 +107,7 @@ export default function EditPostPage({ params }: { params: Promise<{ id: string 
       .update({
         title, slug, category, date,
         excerpt, description, content,
+        images, // save updated images array
         published,
         updated_at: new Date().toISOString(),
       })
@@ -208,6 +245,48 @@ export default function EditPostPage({ params }: { params: Promise<{ id: string 
           />
         </div>
 
+        {/* image upload */}
+        <div>
+          <label className={labelClass}>
+            Images <span className="text-gray-400">(optional, multiple allowed)</span>
+          </label>
+
+          <input
+            type="file"
+            accept="image/*"
+            multiple
+            onChange={handleFileChange}
+            className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:bg-gray-900 file:text-white hover:file:bg-gray-700"
+          />
+
+          {uploading && (
+            <p className="text-sm text-gray-400 mt-2">Uploading images...</p>
+          )}
+
+          {/* show existing and newly uploaded images */}
+          {images.length > 0 && (
+            <div className="grid grid-cols-3 gap-2 mt-3">
+              {images.map((url, index) => (
+                <div key={index} className="relative h-24">
+                  <img
+                    src={url}
+                    alt={`image ${index + 1}`}
+                    className="w-full h-full object-cover rounded-lg"
+                  />
+                  {/* remove image from array */}
+                  <button
+                    type="button"
+                    onClick={() => setImages(prev => prev.filter((_, i) => i !== index))}
+                    className="absolute top-1 right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center"
+                  >
+                    x
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
         <div className="flex items-center gap-3">
           <input
             type="checkbox"
@@ -226,7 +305,7 @@ export default function EditPostPage({ params }: { params: Promise<{ id: string 
         <div className="flex gap-4">
           <button
             type="submit"
-            disabled={loading}
+            disabled={loading || uploading}
             className="bg-gray-900 text-white px-6 py-2 rounded-lg text-sm hover:bg-gray-700 transition-colors duration-200 disabled:opacity-50"
           >
             {loading ? "Saving..." : "Save Changes"}

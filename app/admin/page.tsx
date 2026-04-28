@@ -3,6 +3,7 @@ import { redirect } from "next/navigation"
 import { supabase } from "@/lib/supabase"
 import Link from "next/link"
 
+
 export default async function AdminDashboard() {
   // check if user is logged in — if not redirect to login
   const session = await getServerSession()
@@ -103,3 +104,4 @@ export default async function AdminDashboard() {
     </main>
   )
 }
+

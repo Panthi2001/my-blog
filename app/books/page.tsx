@@ -1,10 +1,10 @@
-import { getAllPostsFromDB } from "@/lib/posts"
+import { getPostsByCategory } from "@/lib/posts"
 import Link from "next/link"
 import Image from "next/image"
 
 export default async function BooksPage() {
-  const posts = await getAllPostsFromDB().then(p => p.filter(post => post.category === "books"))
-
+  // get only movie posts
+const posts = await getPostsByCategory("books")
   return (
     <main className="max-w-2xl mx-auto px-6 py-16">
 

@@ -1,10 +1,10 @@
-import { getAllPosts } from "@/lib/posts"
+import { getPostsByCategory } from "@/lib/posts"
 import Link from "next/link"
 import Image from "next/image"
 
-export default function LifePage() {
-  const posts = getAllPosts().filter(post => post.category === "life")
-
+export default async function LifePage() {
+  // get only movie posts
+const posts = await getPostsByCategory("life")
   return (
     <main className="max-w-2xl mx-auto px-6 py-16">
 
