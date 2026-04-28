@@ -132,3 +132,20 @@ export async function getPostBySlugFromDB(
 
   return data as Post
 }
+
+export async function searchPosts(query: string): Promise<Post[]> {
+  // ilike = case insensitive search, % means anything before or after
+  const { data, error } = await supabase
+    .from("posts")
+    .select("*")
+    .or(`title.ilike.%${query}%,excerpt.ilike.%${query}%,content.ilike.%${query}%`)
+    .eq("published", true)
+    .order("date", { ascending: false })
+
+  if (error) {
+    console.error("Search error:", error)
+    return []
+  }
+
+  return data as Post[]
+}

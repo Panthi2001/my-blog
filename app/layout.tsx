@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { Geist } from "next/font/google"
 import Link from "next/link"
 import "./globals.css"
-
+import SearchBar from "./SearchBar"
 const geist = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -29,6 +29,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Link href="/" className="font-semibold text-gray-900 tracking-tight hover:text-gray-600 transition-colors duration-200">
               Kushal
             </Link>
+              <SearchBar />
+
 
             {/* links — right side */}
             <div className="flex items-center gap-6 text-sm text-gray-500">
