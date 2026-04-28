@@ -5,7 +5,15 @@ import Link from "next/link"
 import { Post } from "@/lib/posts"
 import Image from "next/image"
 
-export default function HomeClient({ posts }: { posts: Post[] }) {
+export default function HomeClient({
+  posts,
+  currentPage,
+  totalPages,
+}: {
+  posts: Post[]
+  currentPage: number
+  totalPages: number
+})  {
   const [showMore, setShowMore] = useState(false)
 
   return (
@@ -58,8 +66,7 @@ export default function HomeClient({ posts }: { posts: Post[] }) {
           )}
         </div>
       </div>
-
-      {/* Bottom half — latest writing */}
+{/* Bottom half — latest writing */}
       <div>
         <h2 className="text-xl font-semibold text-gray-900 mb-6">
           Latest Writing
@@ -69,34 +76,29 @@ export default function HomeClient({ posts }: { posts: Post[] }) {
           {posts.map((post: Post) => (
             <div key={post.slug} className="border-b border-gray-100 pb-8 pt-8">
 
-             {/* show first image as cover if it exists */}
-{post.images && post.images.length > 0 && (
-  <div className="relative h-48 mb-3">
-    <Image
-      src={post.images[0]}
-      alt={post.title}
-      fill
-      className="rounded-lg object-cover"
-    />
-  </div>
-)}
+              {post.images && post.images.length > 0 && (
+                <div className="relative h-48 mb-3">
+                  <Image
+                    src={post.images[0]}
+                    alt={post.title}
+                    fill
+                    className="rounded-lg object-cover"
+                  />
+                </div>
+              )}
 
-              {/* category tag */}
               <span className="text-xs uppercase tracking-widest text-gray-400">
                 {post.category}
               </span>
 
-              {/* title */}
               <h3 className="text-lg font-semibold text-gray-900 mt-1 mb-2">
                 {post.title}
               </h3>
 
-              {/* excerpt */}
               <p className="text-gray-500 text-sm leading-relaxed mb-3">
                 {post.excerpt}
               </p>
 
-              {/* date and read more */}
               <div className="flex items-center justify-between">
                 <span className="text-xs text-gray-400">{post.date}</span>
                 <Link
@@ -110,6 +112,34 @@ export default function HomeClient({ posts }: { posts: Post[] }) {
             </div>
           ))}
         </div>
+
+        {/* pagination — only shows when there are more than 10 posts */}
+        {totalPages > 1 && (
+          <div className="flex items-center justify-between mt-12 pt-8 border-t border-gray-100">
+
+            {currentPage > 1 ? (
+              <Link href={`/?page=${currentPage - 1}`} className="text-sm text-blue-500 hover:underline">
+                ← Previous
+              </Link>
+            ) : (
+              <span />
+            )}
+
+            <span className="text-xs text-gray-400">
+              Page {currentPage} of {totalPages}
+            </span>
+
+            {currentPage < totalPages ? (
+              <Link href={`/?page=${currentPage + 1}`} className="text-sm text-blue-500 hover:underline">
+                Next →
+              </Link>
+            ) : (
+              <span />
+            )}
+
+          </div>
+        )}
+
       </div>
 
     </main>

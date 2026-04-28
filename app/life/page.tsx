@@ -16,9 +16,9 @@ export default function LifePage() {
         {/* YOUR QUOTE HERE — pick something that resonates with how you see life */}
         <blockquote className="border-l-4 border-gray-300 pl-6 mb-8">
           <p className="text-gray-600 italic text-lg leading-relaxed">
-            "Your quote here"
+           Yet to be figured out
           </p>
-          <footer className="text-sm text-gray-400 mt-2">— Author</footer>
+          <footer className="text-sm text-gray-400 mt-2">— Kusha Panthi</footer>
         </blockquote>
 
         <div className="space-y-4 text-gray-600 leading-relaxed">
@@ -26,9 +26,7 @@ export default function LifePage() {
           {/* Talk about why you write about life */}
           {/* What does this section mean to you */}
           {/* What kind of things will you write about here */}
-          <p>Your intro paragraph one here.</p>
-          <p>Your intro paragraph two here.</p>
-          <p>Your intro paragraph three here.</p>
+        <p> Someone in the 5 B.C said who gives a fuck</p>
         </div>
       </div>
 

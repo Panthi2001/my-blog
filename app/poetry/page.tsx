@@ -56,7 +56,7 @@ export default async function PoetryPage() {
             in the quiet moments between everything else. Some are poems I have come
             across that stopped me mid-scroll and made me read them again. And again.
           </p>
-        </div>
+      </div>
       </div>
 
       <div className="border-t border-gray-100 mb-12" />

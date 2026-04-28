@@ -16,9 +16,9 @@ export default function AbstractPage() {
         {/* YOUR QUOTE HERE — something philosophical, economic, or thought provoking */}
         <blockquote className="border-l-4 border-gray-300 pl-6 mb-8">
           <p className="text-gray-600 italic text-lg leading-relaxed">
-            "Your quote here"
+            Boxes which are unchecked
           </p>
-          <footer className="text-sm text-gray-400 mt-2">— Author</footer>
+          <footer className="text-sm text-gray-400 mt-2">— Unknown</footer>
         </blockquote>
 
         <div className="space-y-4 text-gray-600 leading-relaxed">
@@ -26,9 +26,7 @@ export default function AbstractPage() {
           {/* Talk about what abstract means to you */}
           {/* Economy, society, philosophy, big ideas */}
           {/* Why these topics matter to you */}
-          <p>Your intro paragraph one here.</p>
-          <p>Your intro paragraph two here.</p>
-          <p>Your intro paragraph three here.</p>
+          <p>This section of the blog is for unexpected writings, fun moments, random incidents, or anything I think is a good read. No particular theme, no structure. Just things that felt worth putting down somewhere.</p>
         </div>
       </div>
 

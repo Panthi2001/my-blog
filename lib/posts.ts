@@ -77,20 +77,25 @@ export function getPostBySlug(category: string, slug: string): Post | undefined 
   }
 }
 
-export async function getAllPostsFromDB(): Promise<Post[]> {
-  const { data, error } = await supabase
+export async function getAllPostsFromDB(page = 1, limit = 10): Promise<{posts: Post[], total: number}> {
+  const from = (page - 1) * limit
+  const to = from + limit - 1
+
+  const { data, error, count } = await supabase
     .from("posts")
-    .select("*")
+    .select("*", { count: "exact" })
+    .eq("published", true)
     .order("date", { ascending: false })
+    .range(from, to)
 
   if (error) {
     console.error("Error fetching posts:", error)
-    return []
+    return { posts: [], total: 0 }
   }
 
- 
-  return data as Post[]
+  return { posts: data as Post[], total: count || 0 }
 }
+
 export async function getPostBySlugFromDB(
   category: string,
   slug: string
