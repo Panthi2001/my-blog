@@ -9,7 +9,7 @@ const geist = Geist({
 })
 
 export const metadata: Metadata = {
-  title: "Lens of Kushal",
+  title: "Kushal's ",
   description: "A world through the eyes of Kushal. Movies, books, poetry and everything in between.",
   icons:{
     icon:"./favicon.ico"
@@ -27,7 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
             {/* blog name — left side */}
             <Link href="/" className="font-semibold text-gray-900 tracking-tight hover:text-gray-600 transition-colors duration-200">
-              Lens of Kushal
+              Kushal
             </Link>
 
             {/* links — right side */}
