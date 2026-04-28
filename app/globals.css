@@ -1,7 +1,51 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+@variant dark (&:is(.dark *));
+
+:root {
+  --bg: #ffffff;
+  --text-primary: #171717;
+  --text-secondary: #6b7280;
+  --text-muted: #9ca3af;
+  --border: #f3f4f6;
+}
+
+.dark {
+  --bg: #0a0a0a;
+  --text-primary: #ffffff;
+  --text-secondary: #d1d5db;
+  --text-muted: #6b7280;
+  --border: #1f2937;
+}
 
 body {
-  background-color: #ffffff;
-  color: #171717;
+  background-color: var(--bg);
+  color: var(--text-primary);
+}
+
+h1, h2, h3, h4 {
+  color: var(--text-primary);
+}
+
+p {
+  color: var(--text-secondary);
+}
+
+a {
+  color: inherit;
+}
+
+input, textarea, select {
+  background-color: var(--bg);
+  color: var(--text-primary);
+  border-color: var(--border);
+}
+
+nav, header {
+  background-color: var(--bg);
+  border-color: var(--border);
+}
+
+.border-gray-100 {
+  border-color: var(--border);
 }

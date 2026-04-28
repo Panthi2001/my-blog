@@ -3,6 +3,7 @@ import { Geist } from "next/font/google"
 import Link from "next/link"
 import "./globals.css"
 import SearchBar from "./SearchBar"
+import DarkModeToggle from "@/app/components/DarkModeToggle"
 const geist = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -19,10 +20,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={geist.variable}>
-      <body className="bg-white text-gray-900 min-h-screen flex flex-col">
+        <body className="bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 min-h-screen flex flex-col">
 
         {/* navbar */}
-        <header className="border-b border-gray-100 sticky top-0 bg-white z-10">
+       <header className="border-b border-gray-100 dark:border-gray-800 sticky top-0 bg-white dark:bg-gray-950 z-10">
           <nav className="max-w-2xl mx-auto px-6 py-4 flex items-center justify-between">
 
             {/* blog name — left side */}
@@ -55,6 +56,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Link href="/photography" className="hover:text-gray-900 transition-colors duration-200">
                 Photography
               </Link>
+              <DarkModeToggle />
               
             </div>
              {/* second row — search bar */}
