@@ -29,7 +29,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Link href="/" className="font-semibold text-gray-900 tracking-tight hover:text-gray-600 transition-colors duration-200">
               Kushal
             </Link>
-              <SearchBar />
+      
 
 
             {/* links — right side */}
@@ -57,6 +57,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </Link>
               
             </div>
+             {/* second row — search bar */}
+  
 
           </nav>
         </header>
@@ -65,7 +67,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main className="flex-1">
           {children}
         </main>
-
+<div className="max-w-2xl mx-auto px-6 pb-3">
+    <SearchBar />
+  </div>
         {/* footer */}
         <footer className="border-t border-gray-100 mt-16">
           <div className="max-w-2xl mx-auto px-6 py-8 flex items-center justify-between text-sm text-gray-400">
