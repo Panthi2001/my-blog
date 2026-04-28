@@ -23,7 +23,13 @@ export default function HomeClient({
       <div className="flex items-center gap-8 mb-16 px-6 py-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
         
         {/* photo placeholder */}
-        <div className="w-24 h-24 rounded-full bg-gray-200 shrink-0" />
+    <Image
+  src="/Kushal.png"
+  alt="Kushal Panthi"
+  width={96}
+  height={96}
+  className="w-24 h-24 rounded-full object-cover shrink-0 hover:ring-2 hover:ring-black transition-all duration-200"
+/>
         
         <div>
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
