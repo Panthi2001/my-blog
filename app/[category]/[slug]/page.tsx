@@ -2,7 +2,7 @@ import { getPostBySlugFromDB } from "@/lib/posts"
 import { notFound } from "next/navigation"
 import ReactMarkdown from "react-markdown"
 import Image from "next/image"
-
+import CommentSection from "@/app/components/CommentSection"
 export default async function ArticlePage({
   params,
 }: {
@@ -54,7 +54,7 @@ export default async function ArticlePage({
       }`}>
         <ReactMarkdown>{post.content}</ReactMarkdown>
       </div>
-
+        <CommentSection postSlug={slug} postCategory={category} />
     </main>
   )
 }
