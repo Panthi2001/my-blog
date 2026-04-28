@@ -11,6 +11,9 @@ const geist = Geist({
 export const metadata: Metadata = {
   title: "Lens of Kushal",
   description: "A world through the eyes of Kushal. Movies, books, poetry and everything in between.",
+  icons:{
+    icon:"./favicon.ico"
+  }
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

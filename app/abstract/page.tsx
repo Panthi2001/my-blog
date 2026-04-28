@@ -2,7 +2,7 @@ import { getAllPostsFromDB } from "@/lib/posts"
 import Link from "next/link"
 import Image from "next/image"
 
-export default function AbstractPage() {
+export default async function AbstractPage() {
   const { posts: allPosts } = await getAllPostsFromDB()
   const posts = allPosts.filter(post => post.category === "abstract")
   return (
