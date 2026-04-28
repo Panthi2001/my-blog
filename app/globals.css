@@ -49,3 +49,18 @@ nav, header {
 .border-gray-100 {
   border-color: var(--border);
 }
+/* prevent horizontal overflow on mobile */
+body {
+  overflow-x: hidden;
+}
+
+/* images never overflow their container */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* text stays readable on small screens */
+html {
+  -webkit-text-size-adjust: 100%;
+}
