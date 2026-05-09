@@ -265,7 +265,7 @@ export default function EditPostPage({ params }: { params: Promise<{ id: string 
 
           {/* show existing and newly uploaded images */}
           {images.length > 0 && (
-            <div className="grid grid-cols-3 gap-2 mt-3">
+            <div className="grid grid-cols-3 gap-2 mt-3 max-h-48 overflow-y-auto">
               {images.map((url, index) => (
                 <div key={index} className="relative h-24">
                   <img
